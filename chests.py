@@ -8,7 +8,7 @@ class Chest:
         'ultimate': random.randint(0, 100)
     }
     key_multi = {
-        'elite': random.uniform(.1, 30),
+        'elite': random.uniform(.1, 5),
         'master': random.uniform(1.5, 10),
         'insane': random.uniform(2.5, 20),
         'ultimate': random.uniform(10, 40)
@@ -39,8 +39,7 @@ class Chest:
                 print(self.keys['ultimate'])
                 isOpen = True
             return isOpen
-        print(f'{self.key} Chest')
-        print('Your key gets stuck in the ancient lock and crumbles to dust.')
+        return isOpen
 
 
 class Muddy(Chest):
@@ -52,17 +51,11 @@ class Muddy(Chest):
         if self.open():
             print('Chest Opened! Time to multiply!')
             print(f'Worth {int(self.value * self.key_multi[self.key])}')
-
-
-class Muddy(Chest):
-    def __init__(self, key, value = 300_000):
-        super().__init__(key)
-        self.value = value
-    
-    def multiplier(self):
-        if self.open():
-            print('Chest Opened! Time to multiply!')
-            print(f'Worth {int(self.value * self.key_multi[self.key])}')
+            return int(self.value * self.key_multi[self.key])
+        else:
+            print(f'{self.key.title()} Muddy Chest')
+            print('Your key gets stuck in the ancient lock and crumbles to dust.')
+            return 0
 
 
 class Grubby(Chest):
@@ -74,6 +67,11 @@ class Grubby(Chest):
         if self.open():
             print('Chest Opened! Time to multiply!')
             print(f'Worth {int(self.value * self.key_multi[self.key])}')
+            return int(self.value * self.key_multi[self.key])
+        else:
+            print(f'{self.key.title()} Grubby Chest')
+            print('Your key gets stuck in the ancient lock and crumbles to dust.')
+            return 0
 
 
 class Sinister(Chest):
@@ -85,6 +83,11 @@ class Sinister(Chest):
         if self.open():
             print('Chest Opened! Time to multiply!')
             print(f'Worth {int(self.value * self.key_multi[self.key])}')
+            return int(self.value * self.key_multi[self.key])
+        else:
+            print(f'{self.key.title()} Sinister Chest')
+            print('Your key gets stuck in the ancient lock and crumbles to dust.')
+            return 0
 
 
 class Crystal(Chest):
@@ -96,6 +99,11 @@ class Crystal(Chest):
         if self.open():
             print('Chest Opened! Time to multiply!')
             print(f'Worth {int(self.value * self.key_multi[self.key])}')
+            return int(self.value * self.key_multi[self.key])
+        else:
+            print(f'{self.key.title()} Crystal Chest')
+            print('Your key gets stuck in the ancient lock and crumbles to dust.')
+            return 0
 
 
 class EnhancedCrystal(Chest):
@@ -107,6 +115,11 @@ class EnhancedCrystal(Chest):
         if self.open():
             print('Chest Opened! Time to multiply!')
             print(f'Worth {int(self.value * self.key_multi[self.key])}')
+            return int(self.value * self.key_multi[self.key])
+        else:
+            print(f'{self.key.title()} Enhanced Crystal Chest')
+            print('Your key gets stuck in the ancient lock and crumbles to dust.')
+            return 0
 
 
 class Brimstone(Chest):
@@ -118,6 +131,11 @@ class Brimstone(Chest):
         if self.open():
             print('Chest Opened! Time to multiply!')
             print(f'Worth {int(self.value * self.key_multi[self.key])}')
+            return int(self.value * self.key_multi[self.key])
+        else:
+            print(f'{self.key.title()} Brimstone Chest')
+            print('Your key gets stuck in the ancient lock and crumbles to dust.')
+            return 0
 
 
 class Larrans(Chest):
@@ -129,6 +147,11 @@ class Larrans(Chest):
         if self.open():
             print('Chest Opened! Time to multiply!')
             print(f'Worth {int(self.value * self.key_multi[self.key])}')
+            return int(self.value * self.key_multi[self.key])
+        else:
+            print(f'{self.key.title()} Larrans Chest')
+            print('Your key gets stuck in the ancient lock and crumbles to dust.')
+            return 0
 
 
 class Barrows(Chest):
@@ -140,6 +163,11 @@ class Barrows(Chest):
         if self.open():
             print('Chest Opened! Time to multiply!')
             print(f'Worth {int(self.value * self.key_multi[self.key])}')
+            return int(self.value * self.key_multi[self.key])
+        else:
+            print(f'{self.key.title()} Barrows Chest')
+            print('Your key gets stuck in the ancient lock and crumbles to dust.')
+            return 0
 
 
 class ThirdAge(Chest):
@@ -151,17 +179,67 @@ class ThirdAge(Chest):
         if self.open():
             print('Chest Opened! Time to multiply!')
             print(f'Worth {int(self.value * self.key_multi[self.key])}')
+            return int(self.value * self.key_multi[self.key])
+        else:
+            print(f'{self.key.title()} 3rd Age Chest')
+            print('Your key gets stuck in the ancient lock and crumbles to dust.')
+            return 0
 
 
 
     
 
+def run():
+    player_gold = 1_000_000_000
+    while player_gold > 300_000:
+        key = input(f'You have {player_gold}! Pick a chest elite/master/insane/ultimate: ')
+        chest = input(f'Pick a chest! m/g/s/c/ec/bs/l/b/3a: ')
+        if chest == 'm':
+            player_gold -= Muddy(key).value
+            player_gold += Muddy(key).multiplier()
+            print(f'Gold: {player_gold}')
+            return
+        elif chest == 'g':
+            player_gold -= Grubby(key).value
+            player_gold += Grubby(key).multiplier()
+            print(f'Gold: {player_gold}')
+            return
+        elif chest == 's':
+            player_gold -= Sinister(key).value
+            player_gold += Sinister(key).multiplier()
+            print(f'Gold: {player_gold}')
+            return
+        elif chest == 'c':
+            player_gold -= Crystal(key).value
+            player_gold += Crystal(key).multiplier()
+            print(f'Gold: {player_gold}')
+            return
+        elif chest == 'ec':
+            player_gold -= EnhancedCrystal(key).value
+            player_gold += EnhancedCrystal(key).multiplier()
+            print(f'Gold: {player_gold}')
+            return
+        elif chest == 'bs':
+            player_gold -= Brimstone(key).value
+            player_gold += Brimstone(key).multiplier()
+            print(f'Gold: {player_gold}')
+            return
+        elif chest == 'l':
+            player_gold -= Larrans(key).value
+            player_gold += Larrans(key).multiplier()
+            print(f'Gold: {player_gold}')
+            return
+        elif chest == 'b':
+            player_gold -= Barrows(key).value
+            player_gold += Barrows(key).multiplier()
+            print(f'Gold: {player_gold}')
+            return
+        elif chest == '3a':
+            player_gold -= ThirdAge(key).value
+            player_gold += ThirdAge(key).multiplier()
+            print(f'Gold: {player_gold}')
+            return
+        else:
+            print('Input Invalid! Please try again.')
 
-test_chest = Chest('elite')
-# test_chest.open()
-
-muddy_chest = Muddy('elite')
-
-# muddy_chest.open()
-
-muddy_chest.multiplier()
+run()
