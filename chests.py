@@ -84,21 +84,32 @@ class ThirdAge(Chest):
 
 
 def run():
-    player_gold = 10_000_000_000
+    player_gold = 1_000_000_000
     while player_gold > 300_000:
         key = input(f'\n\tYou have {numerize.numerize(player_gold, 2)}! Pick a key and chest\n\telite/master/insane/ultimate\n\tm/g/s/c/ec/bs/l/b/3a: ').split(' ')
 
         chest_types = {'m': Muddy, 'g': Grubby, 's': Sinister, 'c': Crystal, 'ec': EnhancedCrystal,
                        'bs': Brimstone, 'l': Larrans, 'b': Barrows, '3a': ThirdAge}
         
-        if key[1] in chest_types:
-            chest = chest_types[key[1]](key[0])
-            player_gold -= chest.value
-            player_gold += chest.multiplier()
-            print(f'\tGold: {numerize.numerize(player_gold, 2)}')
-            print('\t==============================')
+        try:
+            amount = int(key[2])
+        except:
+            amount = 1
 
-        else:
-            print('\tInput Invalid! Please try again.')
+        if key[0] == 'q':
+            print(f'\n\tRemaining balance: {numerize.numerize(player_gold, 2)}!\n\tThank you for playing!')
+            return
+
+        while amount > 0:
+            if len(key) >= 2 and key[1] in chest_types:
+                chest = chest_types[key[1]](key[0])
+                player_gold -= chest.value
+                player_gold += chest.multiplier()
+                print(f'\tGold: {numerize.numerize(player_gold, 2)}')
+                print('\t==============================')
+                amount -= 1
+            else:
+                print('\tInput Invalid! Please try again.')
+                break
 
 run()
